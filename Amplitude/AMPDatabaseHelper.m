@@ -112,7 +112,7 @@ static NSString *const GET_VALUE = @"SELECT %@, %@ FROM %@ WHERE %@ = ?;";
     }
     instanceName = [instanceName lowercaseString];
 
-    if (self = [super init]) {
+    if ((self = [super init])) {
         NSString *databaseDirectory = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex: 0];
         NSString *databasePath = [databaseDirectory stringByAppendingPathComponent:@"com.amplitude.database"];
         if (![instanceName isEqualToString:kAMPDefaultInstance]) {
@@ -122,7 +122,7 @@ static NSString *const GET_VALUE = @"SELECT %@, %@ FROM %@ WHERE %@ = ?;";
         _queue = dispatch_queue_create([QUEUE_NAME UTF8String], NULL);
         dispatch_queue_set_specific(_queue, kDispatchQueueKey, (__bridge void *)self, NULL);
         if (![[NSFileManager defaultManager] fileExistsAtPath:_databasePath]) {
-            [self createTables];
+            (void)[self createTables];
         }
     }
     return self;
@@ -434,7 +434,7 @@ static NSString *const GET_VALUE = @"SELECT %@, %@ FROM %@ WHERE %@ = ?;";
     }];
 
     if (!success) {
-        [self resetDB:NO]; // not much we can do, just start fresh
+        (void) [self resetDB:NO]; // not much we can do, just start fresh
     }
     return success;
 }
@@ -458,7 +458,7 @@ static NSString *const GET_VALUE = @"SELECT %@, %@ FROM %@ WHERE %@ = ?;";
     }];
 
     if (!success) {
-        [self resetDB:NO]; // not much we can do, just start fresh
+        (void) [self resetDB:NO]; // not much we can do, just start fresh
     }
     return success;
 }
@@ -489,7 +489,8 @@ static NSString *const GET_VALUE = @"SELECT %@, %@ FROM %@ WHERE %@ = ?;";
                 if ([table isEqualToString:STORE_TABLE_NAME]) {
                     value = [[NSString alloc] initWithUTF8String:(char*)sqlite3_column_text(stmt, 1)];
                 } else {
-                    value = [[NSNumber alloc] initWithLongLong:sqlite3_column_int64(stmt, 1)];
+                    long long longlongValue = sqlite3_column_int64(stmt, 1);
+                    value = [[NSNumber alloc] initWithLongLong:longlongValue];
                 }
             }
         } else {

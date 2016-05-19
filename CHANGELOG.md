@@ -1,5 +1,17 @@
 ## Unreleased
 
+* Add documentation for SDK functions. You can take a look [here](https://rawgit.com/amplitude/Amplitude-iOS/master/documentation/html/index.html). A link has also been added to the Readme.
+
+## 3.7.0 (April 20, 2016)
+
+* Add helper method `getSessionId` to expose the current sessionId value.
+* Add support for setting groups for users and events. See [Readme](https://github.com/amplitude/Amplitude-iOS#setting-groups) for more information.
+* Add logRevenueV2 and new Revenue class to support logging revenue events with properties, and revenue type. See [Readme](https://github.com/amplitude/Amplitude-iOS#tracking-revenue) for more info.
+
+## 3.6.0 (March 28, 2016)
+
+* Add support for prepend user property operation.
+* Fix support for 32-bit devices. Switch to using sqlite3.0, and cast return values from sqlite3.
 * Add support for logging events to multiple Amplitude apps. See [Readme](https://github.com/amplitude/Amplitude-iOS#tracking-events-to-multiple-amplitude-apps) for details.
 
 ## 3.5.0 (January 15, 2016)
@@ -14,7 +26,7 @@
 
 * Remove dependency on FMDB, use built-in SQLite3 library.
 * Updated DeviceInfo platform strings, added iPhone 6s, iPhone 6s Plus, iPod Touch 6G.
-* Fixed bug to make sure events can be serialized before saving.
+* Fix bug to make sure events can be serialized before saving.
 
 ## 3.3.0 (December 15, 2015)
 
